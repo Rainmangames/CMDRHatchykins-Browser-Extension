@@ -12,8 +12,11 @@ function renameChannel() {
     
     // Online selector
     const onlineElements = document.querySelectorAll('#live-channel-stream-information > div > div > div.Layout-sc-1xcs6mc-0.dRGOOY > div > div.Layout-sc-1xcs6mc-0.evfzyg > div.Layout-sc-1xcs6mc-0.denZNh.metadata-layout__support > div.Layout-sc-1xcs6mc-0.jjAyLi > div > a > h1');
+    
+    // Search bar selector
+    const searchBarElements = document.querySelectorAll('#root > div > div.Layout-sc-1xcs6mc-0.lcpZLv > div > main > div.root-scrollable.scrollable-area > div.simplebar-scroll-content > div > div > div > div > div.Layout-sc-1xcs6mc-0.cVmNmw > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div > div > div.Layout-sc-1xcs6mc-0.hPUFxY.search-result-offline_channel--body > div.Layout-sc-1xcs6mc-0.kprwFK > div.Layout-sc-1xcs6mc-0.laLhvt > div > strong > a');
 
-    const allElements = [...offlineElements, ...onlineElements];
+    const allElements = [...offlineElements, ...onlineElements, ...searchBarElements];
 
     console.log('Channel elements found:', allElements.length);
 
