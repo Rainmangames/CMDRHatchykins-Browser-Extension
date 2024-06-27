@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Extension Options</title>
+  <title>Hatchykins Name Changer Options</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,7 +10,7 @@
       background-color: #333; /* Dark mode background */
       color: white; /* Dark mode text color */
     }
-    label, select, button {
+    label, select, button, input {
       display: block;
       margin-top: 10px;
       padding: 5px;
@@ -30,12 +30,14 @@
   </style>
 </head>
 <body>
-  <h1>Twitch Name Changer Options</h1>
+  <h1>Hatchykins Name Changer Options</h1>
   <label for="nameSelect">Change CMDRHatch to:</label>
   <select id="nameSelect">
     <option value="Hatchykins">Hatchykins</option>
     <option value="Hatchypoo">Hatchypoo</option>
+    <option value="custom">Custom</option>
   </select>
+  <input type="text" id="customName" placeholder="Enter custom name" style="display: none;">
   <button id="saveBtn">Save</button>
   <button id="toggleBtn">Turn Off</button>
   <script src="options.js"></script>
