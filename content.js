@@ -1,5 +1,11 @@
 function renameTextNodes(node, newName) {
   if (node.nodeType === Node.TEXT_NODE) {
+    const parent = node.parentNode;
+    if (parent && (parent.tagName === 'TEXTAREA' || parent.isContentEditable || parent.closest('.chat-input__textarea'))) {
+      // Ignore text nodes inside text areas, editable content, or chat input areas
+      return;
+    }
+
     const regex = /CMDRHatch/gi; // Case insensitive
     if (regex.test(node.nodeValue)) {
       console.log('Renaming text node:', node.nodeValue);
@@ -46,7 +52,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true; // Keep the messaging channel open for sendResponse
 });
 
-// Observe for changes to the DOM and rename nodes as needed
+// Observe for changes to the DOM to rename nodes as needed
 const observer = new MutationObserver(() => {
   chrome.storage.sync.get(['newName'], function(data) {
     if (data.newName) {
