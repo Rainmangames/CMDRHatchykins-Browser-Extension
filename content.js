@@ -1,8 +1,8 @@
 function renameTextNodes(node, newName) {
   if (node.nodeType === Node.TEXT_NODE) {
     const parent = node.parentNode;
-    if (parent && (parent.tagName === 'TEXTAREA' || parent.isContentEditable || parent.closest('.chat-input__textarea'))) {
-      // Ignore text nodes inside text areas, editable content, or chat input areas
+    if (parent && (parent.tagName === 'TEXTAREA' || parent.isContentEditable || parent.closest('.chat-input__textarea') || parent.closest('.chat-line__message'))) {
+      // Ignore text nodes inside text areas, editable content, chat input areas, and chat messages
       return;
     }
 
