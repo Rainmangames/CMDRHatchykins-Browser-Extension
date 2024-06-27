@@ -7,13 +7,11 @@ This Chrome extension renames CMDRHatch to Hatchykins
 1. Clone or download this repository.
 2. Go to `chrome://extensions/` in your Chrome/opera browser.
 3. Enable "Developer mode" using the toggle switch in the top right corner.
-4. Click on "Load unpacked" and select the folder containing your extension files.
-5. The extension should now be loaded into your browser.
+4. Click on "Load unpacked" and select the folder containing these files.
+5. The extension should now be loaded into your browser. you can turn it off in the same menu.
+6. done! reload hatchs page and enjoy. 
 
-## Usage
-
-Navigate to `https://www.twitch.tv/cmdrhatch` to see the channel name changed.
-
-## Contributing
+future plans: change it so when hes live, the name on the right also changes. 
+maybe make this a full extension for changing anyones name? no promises.
 
 Feel free to submit issues or pull requests if you have any improvements or suggestions.
