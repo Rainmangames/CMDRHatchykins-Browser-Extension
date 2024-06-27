@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Twitch Channel Renamer",
+  "version": "1.0",
+  "description": "Renames a specific Twitch channel name to something else.",
+  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.twitch.tv/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
