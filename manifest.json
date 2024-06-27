@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Twitch Name Changer",
-  "version": "1.0",
-  "description": "Change CMDRHatch to a different name.",
+  "name": "Hatchykins Name Changer",
+  "version": "1.1",
+  "description": "Change CMDRHatch to Hatchykins, Hatchypoo, or a custom name.",
   "permissions": ["storage", "activeTab", "scripting"],
   "background": {
     "service_worker": "background.js"
@@ -16,8 +16,5 @@
   ],
   "action": {
     "default_popup": "options.html"
-  },
-  "icons": {
-    "128": "icon128.png"
   }
 }
