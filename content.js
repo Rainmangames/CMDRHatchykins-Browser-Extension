@@ -1,47 +1,60 @@
-const originalChannelName = 'CMDRHatch';
-const newChannelName = 'Hatchykins';
-let timeoutId;
-
-function renameChannel() {
-  clearTimeout(timeoutId);
-  timeoutId = setTimeout(() => {
-    console.log('Script is running');
-
-    // Offline selector
-    const offlineElements = document.querySelectorAll('#offline-channel-main-content > div.Layout-sc-1xcs6mc-0.dehlJN.home-header-sticky > div.Layout-sc-1xcs6mc-0.dGvaUO > div.Layout-sc-1xcs6mc-0.jskmre > div.Layout-sc-1xcs6mc-0.hdoiLi > a > div > h1');
-    
-    // Online selector
-    const onlineElements = document.querySelectorAll('#live-channel-stream-information > div > div > div.Layout-sc-1xcs6mc-0.dRGOOY > div > div.Layout-sc-1xcs6mc-0.evfzyg > div.Layout-sc-1xcs6mc-0.denZNh.metadata-layout__support > div.Layout-sc-1xcs6mc-0.jjAyLi > div > a > h1');
-    
-    // Search bar selector
-    const searchBarElements = document.querySelectorAll('#root > div > div.Layout-sc-1xcs6mc-0.lcpZLv > div > main > div.root-scrollable.scrollable-area > div.simplebar-scroll-content > div > div > div > div > div.Layout-sc-1xcs6mc-0.cVmNmw > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div > div > div.Layout-sc-1xcs6mc-0.hPUFxY.search-result-offline_channel--body > div.Layout-sc-1xcs6mc-0.kprwFK > div.Layout-sc-1xcs6mc-0.laLhvt > div > strong > a');
-
-    const allElements = [...offlineElements, ...onlineElements, ...searchBarElements];
-
-    console.log('Channel elements found:', allElements.length);
-
-    allElements.forEach(element => {
-      const trimmedText = element.textContent.trim();
-      console.log('Original text content:', trimmedText);
-      if (trimmedText === originalChannelName) {
-        console.log('Renaming element to:', newChannelName);
-        element.textContent = newChannelName;
-      }
-    });
-  }, 300);
+function renameTextNodes(node, newName) {
+  if (node.nodeType === Node.TEXT_NODE) {
+    const regex = /CMDRHatch/gi; // Case insensitive
+    if (regex.test(node.nodeValue)) {
+      console.log('Renaming text node:', node.nodeValue);
+      node.nodeValue = node.nodeValue.replace(regex, newName);
+    }
+  } else {
+    node.childNodes.forEach(child => renameTextNodes(child, newName));
+  }
 }
 
-const observer = new MutationObserver(renameChannel);
+function renameChannel(newName) {
+  console.log('Script is running');
+  try {
+    const body = document.body;
+    if (body) {
+      renameTextNodes(body, newName);
+    } else {
+      console.error('No body element found.');
+    }
+  } catch (error) {
+    console.error('Error renaming channel:', error);
+  }
+}
+
+function initialize() {
+  chrome.storage.sync.get(['newName'], function(data) {
+    if (data.newName) {
+      renameChannel(data.newName);
+    }
+  });
+}
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'initialize') {
+    console.log('Received initialize message');
+    try {
+      initialize();
+      sendResponse({ status: 'initialized' });
+    } catch (error) {
+      console.error('Error during initialization:', error);
+      sendResponse({ status: 'error', message: error.message });
+    }
+  }
+  return true; // Keep the messaging channel open for sendResponse
+});
+
+// Observe for changes to the DOM and rename nodes as needed
+const observer = new MutationObserver(() => {
+  chrome.storage.sync.get(['newName'], function(data) {
+    if (data.newName) {
+      renameChannel(data.newName);
+    }
+  });
+});
+
 observer.observe(document.body, { childList: true, subtree: true });
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOMContentLoaded event fired');
-  renameChannel();
-});
-
-window.addEventListener('load', () => {
-  console.log('load event fired');
-  renameChannel();
-});
-
-renameChannel();
+initialize();

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Extension Options</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      width: 300px;
+      background-color: #333; /* Dark mode background */
+      color: white; /* Dark mode text color */
+    }
+    label, select, button {
+      display: block;
+      margin-top: 10px;
+      padding: 5px;
+      width: 100%;
+      max-width: 300px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #toggleBtn {
+      background-color: red;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Twitch Name Changer Options</h1>
+  <label for="nameSelect">Change CMDRHatch to:</label>
+  <select id="nameSelect">
+    <option value="Hatchykins">Hatchykins</option>
+    <option value="Hatchypoo">Hatchypoo</option>
+  </select>
+  <button id="saveBtn">Save</button>
+  <button id="toggleBtn">Turn Off</button>
+  <script src="options.js"></script>
+</body>
+</html>

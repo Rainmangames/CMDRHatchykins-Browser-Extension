@@ -1,13 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "Twitch Channel Renamer",
+  "name": "Twitch Name Changer",
   "version": "1.0",
-  "description": "Renames a specific Twitch channel name to something else.",
-  "permissions": ["activeTab", "scripting"],
+  "description": "Change CMDRHatch to a different name.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": ["*://*.twitch.tv/*"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "action": {
+    "default_popup": "options.html"
+  },
+  "icons": {
+    "128": "icon128.png"
+  }
 }
